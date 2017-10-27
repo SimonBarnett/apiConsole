@@ -1,1 +1,1 @@
-<img src="https://github.com/SimonBarnett/apiconsole/blob/master/screenshot.png">
+<img src="https://github.com/SimonBarnett/apiConsole/blob/master/Screenshot.png">
