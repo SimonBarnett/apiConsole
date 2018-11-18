@@ -3,6 +3,27 @@ Imports System.Xml
 
 Public Class frmInstall : Inherits baseForm
 
+#Region "Constructor"
+
+    Sub New(e As endPoint)
+
+        MyBase.New(e)
+        FormType = eFormType.install
+
+        With e
+            epType = .Type
+
+        End With
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+
+    End Sub
+
+#End Region
+
     Public Overrides ReadOnly Property activity As Boolean
         Get
             Return Me.PatchWorker.IsBusy

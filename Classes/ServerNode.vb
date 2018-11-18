@@ -45,6 +45,7 @@ Public Class ServerNode : Inherits TreeNode
         With cmServer
             .MenuItems.Add(New MenuItem("Remove Server", AddressOf removeServer))
             .MenuItems.Add(New MenuItem("Refresh", AddressOf Refresh))
+
         End With
 
     End Sub
@@ -90,22 +91,34 @@ Public Class ServerNode : Inherits TreeNode
             Dim envName As String = env.Attributes("name").Value
             If Not Nodes.ContainsKey(envName) Then
                 Nodes.Add(New envNode(Me, envName))
+
             End If
 
-            For Each feed As XmlNode In doc.SelectNodes("//feed")
+            For Each feed As XmlNode In env.SelectNodes("feed")
                 With TryCast(Me.Nodes(envName), envNode).Feeds.Nodes
                     Dim feedName As String = feed.Attributes("name").Value
                     If Not .ContainsKey(feedName) Then
-                        .Add(New endPoint(ParentForm, Me, feedName, epType.feed))
+                        Select Case feed.Attributes("type").Value.ToLower
+                            Case "mef"
+                                .Add(New endPoint(ParentForm, Me, envName, feedName, epType.feed_mef, feed))
+
+                            Case "dbo"
+                                .Add(New endPoint(ParentForm, Me, envName, feedName, epType.feed_dbo, feed))
+
+                            Case "fso"
+                                .Add(New endPoint(ParentForm, Me, envName, feedName, epType.feed_fso, feed))
+
+                        End Select
+
                     End If
                 End With
             Next
 
-            For Each handler As XmlNode In doc.SelectNodes("//handler")
+            For Each handler As XmlNode In env.SelectNodes("handler")
                 With TryCast(Me.Nodes(envName), envNode).Handlers.Nodes
                     Dim handlerName As String = handler.Attributes("name").Value
                     If Not .ContainsKey(handlerName) Then
-                        .Add(New endPoint(ParentForm, Me, handlerName, epType.handler))
+                        .Add(New endPoint(ParentForm, Me, envName, handlerName, epType.handler))
                     End If
                 End With
             Next

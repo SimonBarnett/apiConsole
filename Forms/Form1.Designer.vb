@@ -32,7 +32,10 @@ Partial Class Form1
         Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveAsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripSeparator()
         Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CloseAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CloseAllButThisToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -40,6 +43,12 @@ Partial Class Form1
         Me.ReloadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FormatToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TileHorizontallyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TileVerticallyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CascadeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GITHubcomToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.Activity = New System.Windows.Forms.ToolStripProgressBar()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -47,12 +56,8 @@ Partial Class Form1
         Me.Splitter1 = New System.Windows.Forms.Splitter()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
-        Me.TileHorizontallyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TileVerticallyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CascadeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CloseAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CloseAllButThisToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.InstallToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -67,10 +72,13 @@ Partial Class Form1
         Me.imgTree.Images.SetKeyName(2, "priority.ico")
         Me.imgTree.Images.SetKeyName(3, "Feeds.ico")
         Me.imgTree.Images.SetKeyName(4, "handler.png")
+        Me.imgTree.Images.SetKeyName(5, "feed-mef.ico")
+        Me.imgTree.Images.SetKeyName(6, "feed-dbo.ico")
+        Me.imgTree.Images.SetKeyName(7, "feed-fso.ico")
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.WindowToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.WindowToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.MdiWindowListItem = Me.WindowToolStripMenuItem
         Me.MenuStrip1.Name = "MenuStrip1"
@@ -88,79 +96,98 @@ Partial Class Form1
         'AddServerToolStripMenuItem
         '
         Me.AddServerToolStripMenuItem.Name = "AddServerToolStripMenuItem"
-        Me.AddServerToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.AddServerToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
         Me.AddServerToolStripMenuItem.Text = "Add Server"
         '
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(160, 6)
         '
         'OpenToolStripMenuItem
         '
         Me.OpenToolStripMenuItem.Enabled = False
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
-        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
         Me.OpenToolStripMenuItem.Text = "&Open"
         '
         'SaveToolStripMenuItem
         '
         Me.SaveToolStripMenuItem.Enabled = False
         Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
-        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
         Me.SaveToolStripMenuItem.Text = "&Save"
         '
         'SaveAsToolStripMenuItem
         '
         Me.SaveAsToolStripMenuItem.Enabled = False
         Me.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem"
-        Me.SaveAsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SaveAsToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
         Me.SaveAsToolStripMenuItem.Text = "Save &As"
+        '
+        'ToolStripMenuItem4
+        '
+        Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(160, 6)
         '
         'CloseToolStripMenuItem
         '
         Me.CloseToolStripMenuItem.Enabled = False
         Me.CloseToolStripMenuItem.Name = "CloseToolStripMenuItem"
-        Me.CloseToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CloseToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
         Me.CloseToolStripMenuItem.Text = "&Close"
+        '
+        'CloseAllToolStripMenuItem
+        '
+        Me.CloseAllToolStripMenuItem.Enabled = False
+        Me.CloseAllToolStripMenuItem.Name = "CloseAllToolStripMenuItem"
+        Me.CloseAllToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.CloseAllToolStripMenuItem.Text = "Close All"
+        '
+        'CloseAllButThisToolStripMenuItem
+        '
+        Me.CloseAllButThisToolStripMenuItem.Enabled = False
+        Me.CloseAllButThisToolStripMenuItem.Name = "CloseAllButThisToolStripMenuItem"
+        Me.CloseAllButThisToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.CloseAllButThisToolStripMenuItem.Text = "Close All but this"
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(160, 6)
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
         Me.ExitToolStripMenuItem.Text = "E&xit"
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExectueHandlerToolStripMenuItem, Me.ReloadToolStripMenuItem, Me.FormatToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExectueHandlerToolStripMenuItem, Me.ReloadToolStripMenuItem, Me.FormatToolStripMenuItem, Me.ToolStripMenuItem3, Me.InstallToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
-        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(47, 20)
+        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
         '
         'ExectueHandlerToolStripMenuItem
         '
         Me.ExectueHandlerToolStripMenuItem.Enabled = False
         Me.ExectueHandlerToolStripMenuItem.Name = "ExectueHandlerToolStripMenuItem"
-        Me.ExectueHandlerToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExectueHandlerToolStripMenuItem.Size = New System.Drawing.Size(114, 22)
         Me.ExectueHandlerToolStripMenuItem.Text = "E&xecute"
         '
         'ReloadToolStripMenuItem
         '
         Me.ReloadToolStripMenuItem.Enabled = False
         Me.ReloadToolStripMenuItem.Name = "ReloadToolStripMenuItem"
-        Me.ReloadToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ReloadToolStripMenuItem.Size = New System.Drawing.Size(114, 22)
         Me.ReloadToolStripMenuItem.Text = "&Reload"
         '
         'FormatToolStripMenuItem
         '
         Me.FormatToolStripMenuItem.Enabled = False
         Me.FormatToolStripMenuItem.Name = "FormatToolStripMenuItem"
-        Me.FormatToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.FormatToolStripMenuItem.Size = New System.Drawing.Size(114, 22)
         Me.FormatToolStripMenuItem.Text = "For&mat"
         '
         'WindowToolStripMenuItem
@@ -169,6 +196,43 @@ Partial Class Form1
         Me.WindowToolStripMenuItem.Name = "WindowToolStripMenuItem"
         Me.WindowToolStripMenuItem.Size = New System.Drawing.Size(63, 20)
         Me.WindowToolStripMenuItem.Text = "&Window"
+        '
+        'TileHorizontallyToolStripMenuItem
+        '
+        Me.TileHorizontallyToolStripMenuItem.Name = "TileHorizontallyToolStripMenuItem"
+        Me.TileHorizontallyToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.TileHorizontallyToolStripMenuItem.Text = "Tile Horizontally"
+        '
+        'TileVerticallyToolStripMenuItem
+        '
+        Me.TileVerticallyToolStripMenuItem.Name = "TileVerticallyToolStripMenuItem"
+        Me.TileVerticallyToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.TileVerticallyToolStripMenuItem.Text = "Tile Vertically"
+        '
+        'CascadeToolStripMenuItem
+        '
+        Me.CascadeToolStripMenuItem.Name = "CascadeToolStripMenuItem"
+        Me.CascadeToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.CascadeToolStripMenuItem.Text = "Cascade"
+        '
+        'HelpToolStripMenuItem
+        '
+        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem, Me.GITHubcomToolStripMenuItem})
+        Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
+        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
+        Me.HelpToolStripMenuItem.Text = "Help"
+        '
+        'AboutToolStripMenuItem
+        '
+        Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.AboutToolStripMenuItem.Text = "About"
+        '
+        'GITHubcomToolStripMenuItem
+        '
+        Me.GITHubcomToolStripMenuItem.Name = "GITHubcomToolStripMenuItem"
+        Me.GITHubcomToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.GITHubcomToolStripMenuItem.Text = "GITHub.com"
         '
         'StatusStrip1
         '
@@ -224,42 +288,16 @@ Partial Class Form1
         Me.Timer2.Enabled = True
         Me.Timer2.Interval = 1000
         '
-        'TileHorizontallyToolStripMenuItem
+        'ToolStripMenuItem3
         '
-        Me.TileHorizontallyToolStripMenuItem.Name = "TileHorizontallyToolStripMenuItem"
-        Me.TileHorizontallyToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
-        Me.TileHorizontallyToolStripMenuItem.Text = "Tile Horizontally"
+        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(149, 6)
         '
-        'TileVerticallyToolStripMenuItem
+        'InstallToolStripMenuItem
         '
-        Me.TileVerticallyToolStripMenuItem.Name = "TileVerticallyToolStripMenuItem"
-        Me.TileVerticallyToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
-        Me.TileVerticallyToolStripMenuItem.Text = "Tile Vertically"
-        '
-        'CascadeToolStripMenuItem
-        '
-        Me.CascadeToolStripMenuItem.Name = "CascadeToolStripMenuItem"
-        Me.CascadeToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
-        Me.CascadeToolStripMenuItem.Text = "Cascade"
-        '
-        'CloseAllToolStripMenuItem
-        '
-        Me.CloseAllToolStripMenuItem.Enabled = False
-        Me.CloseAllToolStripMenuItem.Name = "CloseAllToolStripMenuItem"
-        Me.CloseAllToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
-        Me.CloseAllToolStripMenuItem.Text = "Close All"
-        '
-        'CloseAllButThisToolStripMenuItem
-        '
-        Me.CloseAllButThisToolStripMenuItem.Enabled = False
-        Me.CloseAllButThisToolStripMenuItem.Name = "CloseAllButThisToolStripMenuItem"
-        Me.CloseAllButThisToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
-        Me.CloseAllButThisToolStripMenuItem.Text = "Close All but this"
-        '
-        'ToolStripMenuItem4
-        '
-        Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
-        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(160, 6)
+        Me.InstallToolStripMenuItem.Name = "InstallToolStripMenuItem"
+        Me.InstallToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.InstallToolStripMenuItem.Text = "Install"
         '
         'Form1
         '
@@ -313,4 +351,9 @@ Partial Class Form1
     Friend WithEvents TileHorizontallyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TileVerticallyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CascadeToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HelpToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GITHubcomToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem3 As ToolStripSeparator
+    Friend WithEvents InstallToolStripMenuItem As ToolStripMenuItem
 End Class

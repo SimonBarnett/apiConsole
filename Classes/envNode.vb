@@ -1,5 +1,7 @@
 ﻿Public Class envNode : Inherits TreeNode
 
+    Dim cmEnv As New ContextMenu
+
     Private _Feeds As TreeNode
     Public ReadOnly Property Feeds As TreeNode
         Get
@@ -23,6 +25,14 @@
             .Tag = Name
             .SelectedImageIndex = 2
             .ImageIndex = 2
+            .ContextMenu = cmEnv
+
+            With cmEnv
+                .MenuItems.Add(New MenuItem("$metadata", AddressOf metadata))
+
+            End With
+
+
 
             _Feeds = New TreeNode
             With _Feeds
@@ -47,6 +57,20 @@
 
         End With
 
+    End Sub
+
+    Private Sub metadata(sender As Object, e As System.EventArgs)
+        System.Diagnostics.Process.Start(
+            Replace(
+                String.Format(
+                    "{0}/odata/Priority/tabula.ini/{1}/$metadata",
+                    _Parent.Name,
+                    Me.Name
+                ),
+                "http://",
+                "https://",,, CompareMethod.Text
+            )
+        )
     End Sub
 
 End Class

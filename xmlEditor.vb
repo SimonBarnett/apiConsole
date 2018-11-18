@@ -1,8 +1,15 @@
-﻿Imports System.Runtime.InteropServices
+﻿Imports System.IO
+Imports System.Runtime.InteropServices
 Imports System.Text
 Imports System.Xml
+Imports Newtonsoft.Json
 
 Public Class xmlEditor : Inherits RichTextBox
+
+    Private Enum eLangauge
+        xml
+        json
+    End Enum
 
     Private Const SB_HORZ As Integer = &H0
     Private Const SB_VERT As Integer = &H1
@@ -73,6 +80,20 @@ Public Class xmlEditor : Inherits RichTextBox
         End Set
     End Property
 
+    Private ReadOnly Property Langage As eLangauge
+        Get
+            Select Case Trim(Me.Text).Substring(0, 1)
+                Case "{"
+                    Return eLangauge.json
+
+                Case Else
+                    Return eLangauge.xml
+
+            End Select
+
+        End Get
+    End Property
+
     Public Sub New()
 
         ' This call is required by the designer.
@@ -94,24 +115,42 @@ Public Class xmlEditor : Inherits RichTextBox
             Dim l As Integer = .SelectionLength
 
             Try
-                xmlDoc.LoadXml(Me.Text)
+                Select Case Langage
+                    Case eLangauge.json
+                        Using stringReader As New StringReader(Me.Text)
+                            Using stringWriter As New StringWriter
+                                Dim jsonreader As New JsonTextReader(stringReader)
+                                Dim jsonwriter As New JsonTextWriter(stringWriter)
+                                With jsonwriter
+                                    .Formatting = Newtonsoft.Json.Formatting.Indented
+                                    .WriteToken(jsonreader)
 
-                Using ms As New System.IO.MemoryStream
+                                End With
+                                Dim myEncoder As New System.Text.ASCIIEncoding
+                                Dim ms As MemoryStream = New MemoryStream(myEncoder.GetBytes(stringWriter.ToString))
+                                _internalRTB.LoadFile(ms, RichTextBoxStreamType.PlainText)
+                                .Rtf = _internalRTB.Rtf
 
-                    Using xtw As New Xml.XmlTextWriter(ms, System.Text.Encoding.ASCII)
+                            End Using
+                        End Using
 
-                        xtw.Indentation = _indentSp
-                        xtw.Formatting = Xml.Formatting.Indented
-                        xmlDoc.WriteContentTo(xtw)
-                        xtw.Flush()
+                    Case Else
+                        xmlDoc.LoadXml(Me.Text)
+                        Using ms As New System.IO.MemoryStream
+                            Using xtw As New Xml.XmlTextWriter(ms, System.Text.Encoding.ASCII)
+                                xtw.Indentation = _indentSp
+                                xtw.Formatting = Xml.Formatting.Indented
+                                xmlDoc.WriteContentTo(xtw)
+                                xtw.Flush()
 
-                        ms.Seek(0, System.IO.SeekOrigin.Begin)
-                        _internalRTB.LoadFile(ms, RichTextBoxStreamType.PlainText)
-                        .Rtf = _internalRTB.Rtf
+                                ms.Seek(0, System.IO.SeekOrigin.Begin)
+                                _internalRTB.LoadFile(ms, RichTextBoxStreamType.PlainText)
+                                .Rtf = _internalRTB.Rtf
 
-                    End Using
+                            End Using
+                        End Using
 
-                End Using
+                End Select
 
             Catch ex As Exception
 
@@ -129,7 +168,6 @@ Public Class xmlEditor : Inherits RichTextBox
     Public Sub Format(Optional FromInternal As Boolean = False)
 
         With Me
-
             Dim p As Integer = .SelectionStart
             Dim l As Integer = .SelectionLength
             Dim VS As Integer = .VScrollPos
@@ -137,8 +175,8 @@ Public Class xmlEditor : Inherits RichTextBox
 
             Try
                 If Not FromInternal Then _internalRTB.Text = .Text
-                HighlightRTF()
 
+                If Not Langage = eLangauge.json Then HighlightRTF()
                 BeginUpdate()
                 .Rtf = _internalRTB.Rtf
 
@@ -158,6 +196,33 @@ Public Class xmlEditor : Inherits RichTextBox
 
     End Sub
 
+    Private Function OpenTag() As Char
+        Select Case Langage
+            Case eLangauge.json
+                Return Microsoft.VisualBasic.ChrW(123)
+            Case Else
+                Return Microsoft.VisualBasic.ChrW(60)
+        End Select
+    End Function
+
+    Private Function CloseTag() As Char
+        Select Case Langage
+            Case eLangauge.json
+                Return Microsoft.VisualBasic.ChrW(125)
+            Case Else
+                Return Microsoft.VisualBasic.ChrW(62)
+        End Select
+    End Function
+
+    Private Function EqualTag() As Char
+        Select Case Langage
+            Case eLangauge.json
+                Return Microsoft.VisualBasic.ChrW(58)
+            Case Else
+                Return Microsoft.VisualBasic.ChrW(61)
+        End Select
+    End Function
+
     Private Sub HighlightRTF()
 
         Dim k As Integer = 0
@@ -166,31 +231,25 @@ Public Class xmlEditor : Inherits RichTextBox
         Dim st As Integer
         Dim lasten As Integer = -1
 
+
         While (k < str.Length)
-            st = str.IndexOf(Microsoft.VisualBasic.ChrW(60), k)
+            st = str.IndexOf(OpenTag, k)
             If (st < 0) Then
                 Exit While
             End If
 
             If (lasten > 0) Then
-                _internalRTB.Select((lasten + 1), (st _
-                                - (lasten - 1)))
+                _internalRTB.Select((lasten + 1), (st - (lasten - 1)))
                 _internalRTB.SelectionColor = HighlightColors.HC_INNERTEXT
             End If
 
-            en = str.IndexOf(Microsoft.VisualBasic.ChrW(62), (st + 1))
+            en = str.IndexOf(CloseTag, (st + 1))
             If (en < 0) Then
                 Exit While
             End If
 
             k = (en + 1)
             lasten = en
-            If (str((st + 1)) = Microsoft.VisualBasic.ChrW(33)) Then
-                _internalRTB.Select((st + 1), (en _
-                                - (st - 1)))
-                _internalRTB.SelectionColor = HighlightColors.HC_COMMENT
-                'TODO: Warning!!! continue If
-            End If
 
             Dim nodeText As String = str.Substring((st + 1), (en _
                             - (st - 1)))
@@ -200,6 +259,7 @@ Public Class xmlEditor : Inherits RichTextBox
             Dim startAtt As Integer = 0
             Dim startNodeName As Integer = 0
             Dim i As Integer = 0
+
             Do While (i < nodeText.Length)
                 If quote(nodeText(i)) Then
                     inString = Not inString
@@ -238,7 +298,7 @@ Public Class xmlEditor : Inherits RichTextBox
 
                     Case 3
                         If (Char.IsWhiteSpace(nodeText, i) _
-                                    OrElse (nodeText(i) = Microsoft.VisualBasic.ChrW(61))) Then
+                                    OrElse (nodeText(i) = EqualTag())) Then
                             _internalRTB.Select((startAtt + st), ((i - startAtt) _
                                             + 1))
                             _internalRTB.SelectionColor = HighlightColors.HC_ATTRIBUTE
@@ -286,7 +346,7 @@ Public Class xmlEditor : Inherits RichTextBox
 
         With Me
             Select Case e.KeyData
-                Case Keys.F5, Keys.Alt + Keys.X
+                Case Keys.F5
                     RaiseEvent Execute(Me, New EventArgs)
                     e.Handled = True
                     e.SuppressKeyPress = True
@@ -297,6 +357,14 @@ Public Class xmlEditor : Inherits RichTextBox
                     doEnter()
 
                 Case Else
+                    ' ALT x
+                    If (e.KeyCode And Not Keys.Modifiers) = Keys.X AndAlso e.Modifiers = Keys.Alt Then
+                        RaiseEvent Execute(Me, New EventArgs)
+                        e.Handled = True
+                        e.SuppressKeyPress = True
+
+                    End If
+
                     ' Shift Tab
                     If (e.KeyCode And Not Keys.Modifiers) = Keys.Tab AndAlso e.Modifiers = Keys.Shift Then
                         e.Handled = True

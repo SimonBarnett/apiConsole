@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.IO
 
 Public Class Form1
 
@@ -61,55 +62,35 @@ Public Class Form1
     End Sub
 
     Public Sub OpenDebug()
+
         If Not ServTree.SelectedNode Is Nothing Then
-            With ServTree.SelectedNode
-                If Not ServTree.SelectedNode.Parent Is Nothing Then
 
-                    For Each f As baseForm In Me.MdiChildren
-                        If f.FormType = eFormType.debug _
-                            And f.server = ServTree.SelectedNode.Parent.Parent.Parent.Name _
-                            And f.Environment = ServTree.SelectedNode.Parent.Parent.Name _
-                            And f.EndPoint = ServTree.SelectedNode.Name _
-                        Then
-                            f.BringToFront()
-                            Exit Sub
-                        End If
-                    Next
+            With TryCast(ServTree.SelectedNode, endPoint)
+                For Each f As baseForm In Me.MdiChildren
+                    If f.Accept(eFormType.debug, TryCast(ServTree.SelectedNode, endPoint)) Then
+                        Exit Sub
+                    End If
+                Next
 
-                    Dim frm As baseForm
-                    Select Case ServTree.SelectedNode.Parent.Name
-                        Case "feeds"
-                            frm = New frmFeed()
-                            frm.epType = epType.feed
-                            frm.FormType = eFormType.debug
+                Dim frm As baseForm
+                Select Case .Type
+                    Case epType.handler
+                        frm = New frmHandler(TryCast(ServTree.SelectedNode, endPoint))
 
-                        Case "handlers"
-                            frm = New frmHandler()
-                            frm.epType = epType.handler
-                            frm.FormType = eFormType.debug
+                    Case Else
+                        frm = New frmFeed(TryCast(ServTree.SelectedNode, endPoint))
 
-                        Case Else
-                            Exit Sub
+                End Select
 
-                    End Select
+                'Display the new form.                      
+                'Set the Parent Form of the Child window.  
+                With frm
+                    .MdiParent = Me
+                    .WindowState = FormWindowState.Maximized
+                    .Text = .DisplayName
+                    .Show()
 
-                    'Display the new form.                      
-                    'Set the Parent Form of the Child window.  
-                    frm.MdiParent = Me
-
-                    frm.server = .Parent.Parent.Parent.Name
-                    frm.Environment = .Parent.Parent.Name
-                    frm.EndPoint = .Name
-
-                    frm.Text = String.Format(
-                        "{0}/api/{1}/{2}",
-                        frm.server,
-                        frm.Environment,
-                        frm.EndPoint
-                    )
-                    frm.WindowState = FormWindowState.Maximized
-                    frm.Show()
-                End If
+                End With
 
             End With
 
@@ -120,55 +101,25 @@ Public Class Form1
     Public Sub OpenLog()
 
         If Not ServTree.SelectedNode Is Nothing Then
-            With ServTree.SelectedNode
-                If Not .Parent Is Nothing Then
-                    Select Case .Parent.Name.ToLower
-                        Case "feeds", "handlers"
-                            For Each f As baseForm In Me.MdiChildren
-                                If f.FormType = eFormType.log _
-                                    And f.server = .Parent.Parent.Parent.Name _
-                                    And f.Environment = .Parent.Parent.Name _
-                                    And f.EndPoint = .Name _
-                                Then
-                                    f.BringToFront()
-                                    Exit Sub
-                                End If
-                            Next
+            With TryCast(ServTree.SelectedNode, endPoint)
+                For Each f As baseForm In Me.MdiChildren
+                    If f.Accept(eFormType.log, TryCast(ServTree.SelectedNode, endPoint)) Then
+                        Exit Sub
+                    End If
+                Next
 
-                            'Display the new form.  
-                            Dim frmLog As New frmLog()
+                'Display the new form.  
+                Dim frmLog As New frmLog(TryCast(ServTree.SelectedNode, endPoint))
 
-                            'Set the Parent Form of the Child window.  
-                            frmLog.MdiParent = Me
-                            frmLog.FormType = eFormType.log
+                'Set the Parent Form of the Child window.  
+                With frmLog
+                    .MdiParent = Me
+                    .WindowState = FormWindowState.Maximized
+                    .Text = String.Format("{0}.log", .DisplayName)
+                    .Show()
+                    .doRefresh(frmLog, New System.EventArgs)
 
-                            Select Case .Parent.Name.ToLower
-                                Case "feeds"
-                                    frmLog.epType = epType.feed
-                                    frmLog.TabControl.TabPages.RemoveAt(1)
-
-                                Case "handlers"
-                                    frmLog.epType = epType.handler
-
-                            End Select
-
-                            frmLog.server = .Parent.Parent.Parent.Name
-                            frmLog.Environment = .Parent.Parent.Name
-                            frmLog.EndPoint = .Name
-
-                            frmLog.Text = String.Format(
-                                "{0}/api/{1}/{2}",
-                                frmLog.server,
-                                frmLog.Environment,
-                                Replace(frmLog.EndPoint, ".ashx", ".log")
-                            )
-                            frmLog.WindowState = FormWindowState.Maximized
-                            frmLog.Show()
-                            frmLog.doRefresh(frmLog, New System.EventArgs)
-
-                    End Select
-
-                End If
+                End With
 
             End With
 
@@ -177,43 +128,27 @@ Public Class Form1
     End Sub
 
     Public Sub OpenInstall()
+
         If Not ServTree.SelectedNode Is Nothing Then
-            With ServTree.SelectedNode
-                If Not ServTree.SelectedNode.Parent Is Nothing Then
 
-                    For Each f As baseForm In Me.MdiChildren
-                        If f.FormType = eFormType.install _
-                            And f.server = ServTree.SelectedNode.Parent.Parent.Parent.Name _
-                            And f.Environment = ServTree.SelectedNode.Parent.Parent.Name _
-                            And f.EndPoint = ServTree.SelectedNode.Name _
-                        Then
-                            f.BringToFront()
-                            Exit Sub
-                        End If
-                    Next
+            With TryCast(ServTree.SelectedNode, endPoint)
 
-                    Dim frm As New frmInstall
-                    frm.epType = epType.feed
-                    frm.FormType = eFormType.debug
+                For Each f As baseForm In Me.MdiChildren
+                    If f.Accept(eFormType.install, TryCast(ServTree.SelectedNode, endPoint)) Then
+                        Exit Sub
+                    End If
+                Next
 
+                Dim frm As New frmInstall(TryCast(ServTree.SelectedNode, endPoint))
 
-                    'Display the new form.                      
-                    'Set the Parent Form of the Child window.  
-                    frm.MdiParent = Me
+                'Set the Parent Form of the Child window.  
+                With frm
+                    .MdiParent = Me
+                    .Text = .DisplayName
+                    .Show()
+                    .WindowState = FormWindowState.Maximized
 
-                    frm.server = .Parent.Parent.Parent.Name
-                    frm.Environment = .Parent.Parent.Name
-                    frm.EndPoint = .Name
-
-                    frm.Text = String.Format(
-                        "{0}/api/{1}/{2}",
-                        frm.server,
-                        frm.Environment,
-                        Replace(frm.EndPoint, ".ashx", ".install")
-                    )
-                    frm.WindowState = FormWindowState.Maximized
-                    frm.Show()
-                End If
+                End With
 
             End With
 
@@ -265,7 +200,7 @@ Public Class Form1
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
         Dim f As Boolean = False
         For Each frm As baseForm In Me.MdiChildren
-            If frm.activity Then
+            If frm.Activity Then
                 f = True
                 Exit For
             End If
@@ -289,10 +224,6 @@ Public Class Form1
                 End If
             End If
         End With
-    End Sub
-
-    Private Sub ServTree_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles ServTree.AfterSelect
-
     End Sub
 
     Private Sub ServTree_KeyDown(sender As Object, e As KeyEventArgs) Handles ServTree.KeyDown
@@ -377,5 +308,21 @@ Public Class Form1
     End Sub
 
 #End Region
+
+    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
+        AboutBox1.ShowDialog()
+
+    End Sub
+
+    Private Sub GITHubcomToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GITHubcomToolStripMenuItem.Click
+        System.Diagnostics.Process.Start("https://github.com/simonbarnett/api")
+    End Sub
+
+    Private Sub InstallToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles InstallToolStripMenuItem.Click
+        Dim frm As New Install
+        With frm
+            .ShowDialog()
+        End With
+    End Sub
 
 End Class

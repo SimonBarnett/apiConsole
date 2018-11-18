@@ -30,6 +30,7 @@ Partial Class frmHandler
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SplitContainer = New System.Windows.Forms.SplitContainer()
+        Me.rtb = New apiConsole.xmlEditor()
         Me.TabControl = New System.Windows.Forms.TabControl()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.LogText = New System.Windows.Forms.TextBox()
@@ -45,7 +46,6 @@ Partial Class frmHandler
         Me.ExecuteHandlerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FormatToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SendWorker = New System.ComponentModel.BackgroundWorker()
-        Me.rtb = New apiConsole.xmlEditor()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.SplitContainer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer.Panel1.SuspendLayout()
@@ -96,8 +96,21 @@ Partial Class frmHandler
         '
         Me.SplitContainer.Panel2.Controls.Add(Me.TabControl)
         Me.SplitContainer.Size = New System.Drawing.Size(447, 403)
-        Me.SplitContainer.SplitterDistance = 179
+        Me.SplitContainer.SplitterDistance = 178
         Me.SplitContainer.TabIndex = 1
+        '
+        'rtb
+        '
+        Me.rtb.AcceptsTab = True
+        Me.rtb.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.rtb.Font = New System.Drawing.Font("Consolas", 10.0!)
+        Me.rtb.IndentSp = 3
+        Me.rtb.Location = New System.Drawing.Point(0, 0)
+        Me.rtb.Name = "rtb"
+        Me.rtb.Size = New System.Drawing.Size(447, 178)
+        Me.rtb.TabIndex = 0
+        Me.rtb.Text = ""
+        Me.rtb.WordWrap = False
         '
         'TabControl
         '
@@ -108,7 +121,7 @@ Partial Class frmHandler
         Me.TabControl.Location = New System.Drawing.Point(0, 0)
         Me.TabControl.Name = "TabControl"
         Me.TabControl.SelectedIndex = 0
-        Me.TabControl.Size = New System.Drawing.Size(447, 220)
+        Me.TabControl.Size = New System.Drawing.Size(447, 221)
         Me.TabControl.TabIndex = 3
         '
         'TabPage2
@@ -117,7 +130,7 @@ Partial Class frmHandler
         Me.TabPage2.Location = New System.Drawing.Point(4, 4)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(439, 194)
+        Me.TabPage2.Size = New System.Drawing.Size(439, 195)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Log"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -131,7 +144,7 @@ Partial Class frmHandler
         Me.LogText.Name = "LogText"
         Me.LogText.ReadOnly = True
         Me.LogText.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.LogText.Size = New System.Drawing.Size(433, 188)
+        Me.LogText.Size = New System.Drawing.Size(433, 189)
         Me.LogText.TabIndex = 7
         Me.LogText.WordWrap = False
         '
@@ -141,7 +154,7 @@ Partial Class frmHandler
         Me.TabPage1.Location = New System.Drawing.Point(4, 4)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(439, 194)
+        Me.TabPage1.Size = New System.Drawing.Size(439, 181)
         Me.TabPage1.TabIndex = 2
         Me.TabPage1.Text = "Result"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -152,7 +165,7 @@ Partial Class frmHandler
         Me.WebBrowser.Location = New System.Drawing.Point(3, 3)
         Me.WebBrowser.MinimumSize = New System.Drawing.Size(20, 20)
         Me.WebBrowser.Name = "WebBrowser"
-        Me.WebBrowser.Size = New System.Drawing.Size(433, 188)
+        Me.WebBrowser.Size = New System.Drawing.Size(433, 175)
         Me.WebBrowser.TabIndex = 2
         '
         'MenuStrip1
@@ -206,34 +219,25 @@ Partial Class frmHandler
         Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExecuteHandlerToolStripMenuItem, Me.FormatToolStripMenuItem})
         Me.ToolsToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.MatchOnly
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
-        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(47, 20)
+        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
         '
         'ExecuteHandlerToolStripMenuItem
         '
         Me.ExecuteHandlerToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Replace
         Me.ExecuteHandlerToolStripMenuItem.Name = "ExecuteHandlerToolStripMenuItem"
-        Me.ExecuteHandlerToolStripMenuItem.Size = New System.Drawing.Size(114, 22)
+        Me.ExecuteHandlerToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ExecuteHandlerToolStripMenuItem.Text = "E&xecute"
         '
         'FormatToolStripMenuItem
         '
         Me.FormatToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Replace
         Me.FormatToolStripMenuItem.Name = "FormatToolStripMenuItem"
-        Me.FormatToolStripMenuItem.Size = New System.Drawing.Size(114, 22)
+        Me.FormatToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.FormatToolStripMenuItem.Text = "For&mat"
         '
         'SendWorker
         '
-        '
-        'rtb
-        '
-        Me.rtb.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.rtb.Location = New System.Drawing.Point(0, 0)
-        Me.rtb.Name = "rtb"
-        Me.rtb.Size = New System.Drawing.Size(447, 179)
-        Me.rtb.TabIndex = 0
-        Me.rtb.Text = ""
         '
         'frmHandler
         '

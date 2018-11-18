@@ -11,7 +11,19 @@ Public Class frmLog : Inherits baseForm
 
 #Region "Constructor"
 
-    Sub New()
+    Sub New(e As endPoint)
+
+        MyBase.New(e)
+        FormType = eFormType.log
+
+        With e
+            epType = .Type
+            If Not epType = epType.handler Then
+                'TabControl.TabPages.RemoveAt(1)
+
+            End If
+
+        End With
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -195,74 +207,74 @@ Public Class frmLog : Inherits baseForm
         Me.Close()
     End Sub
 
-    Private Sub Reload_Click(sender As Object, e As EventArgs) Handles ReloadToolStripMenuItem.Click, ReloadToolStripMenuItem1.Click
+    'Private Sub Reload_Click(sender As Object, e As EventArgs) Handles ReloadToolStripMenuItem.Click, ReloadToolStripMenuItem1.Click
 
-        Dim doc As New XmlDocument
-        Dim sel As ListViewItem = SelectedItem()
-        If sel Is Nothing Then
-            Exit Sub
-        Else
+    '    Dim doc As New XmlDocument
+    '    Dim sel As ListViewItem = SelectedItem()
+    '    If sel Is Nothing Then
+    '        Exit Sub
+    '    Else
 
-            Dim logurl As String = String.Format(
-                "{0}/api/{1}/{2}/{3}/{4}/{5}.xml",
-                server,
-                Environment,
-                SelectYear,
-                SelectMonth,
-                SelectDay,
-                sel.SubItems(1).Text
-            )
+    '        Dim logurl As String = String.Format(
+    '            "{0}/api/{1}/{2}/{3}/{4}/{5}.xml",
+    '            server,
+    '            Environment,
+    '            SelectYear,
+    '            SelectMonth,
+    '            SelectDay,
+    '            sel.SubItems(1).Text
+    '        )
 
-            Try
-                doc.Load(logurl)
+    '        Try
+    '            doc.Load(logurl)
 
-            Catch ex As Exception
-                MsgBox(ex.Message)
-                Exit Sub
+    '        Catch ex As Exception
+    '            MsgBox(ex.Message)
+    '            Exit Sub
 
-            End Try
+    '        End Try
 
-        End If
+    '    End If
 
-        For Each f As baseForm In Me.MdiParent.MdiChildren
-            If f.FormType = eFormType.debug _
-                And f.server = Me.server _
-                And f.Environment = Me.Environment _
-                And f.EndPoint = Me.EndPoint _
-            Then
-                With TryCast(f, frmHandler)
-                    .rtb.Text = doc.OuterXml
-                End With
+    '    For Each f As baseForm In Me.MdiParent.MdiChildren
+    '        If f.FormType = eFormType.debug _
+    '            And f.server = Me.server _
+    '            And f.Environment = Me.Environment _
+    '            And f.EndPoint = Me.EndPoint _
+    '        Then
+    '            With TryCast(f, frmHandler)
+    '                .rtb.Text = doc.OuterXml
+    '            End With
 
-                f.BringToFront()
-                Exit Sub
-            End If
-        Next
+    '            f.BringToFront()
+    '            Exit Sub
+    '        End If
+    '    Next
 
-        Dim frm As New frmHandler
+    '    Dim frm As New frmHandler
 
-        frm.epType = epType.handler
-        frm.FormType = eFormType.debug
+    '    frm.epType = epType.handler
+    '    frm.FormType = eFormType.debug
 
-        'Display the new form.                      
-        'Set the Parent Form of the Child window.  
-        frm.MdiParent = Me.MdiParent
-        frm.rtb.Text = doc.OuterXml
-        frm.rtb.Indent()
+    '    'Display the new form.                      
+    '    'Set the Parent Form of the Child window.  
+    '    frm.MdiParent = Me.MdiParent
+    '    frm.rtb.Text = doc.OuterXml
+    '    frm.rtb.Indent()
 
-        frm.server = Me.server
-        frm.Environment = Me.Environment
-        frm.EndPoint = Me.EndPoint
+    '    frm.server = Me.server
+    '    frm.Environment = Me.Environment
+    '    frm.EndPoint = Me.EndPoint
 
-        frm.Text = String.Format(
-            "{0}/api/{1}/{2}",
-            frm.server,
-            frm.Environment,
-            frm.EndPoint
-        )
-        frm.WindowState = FormWindowState.Maximized
-        frm.Show()
+    '    frm.Text = String.Format(
+    '        "{0}/api/{1}/{2}",
+    '        frm.server,
+    '        frm.Environment,
+    '        frm.EndPoint
+    '    )
+    '    frm.WindowState = FormWindowState.Maximized
+    '    frm.Show()
 
-    End Sub
+    'End Sub
 
 End Class

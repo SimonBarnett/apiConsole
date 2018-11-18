@@ -7,8 +7,11 @@
     End Enum
 
     Public Enum epType
-        feed = 0
-        handler = 1
+        feed_mef = 0
+        feed_dbo = 1
+        feed_fso = 2
+        handler = 3
+
     End Enum
 
 End Module
