@@ -1,0 +1,14 @@
+    
+	''' <summary>
+    ''' Get / Set the "#TITLE#" Value of #FORMNAME#.
+    ''' </summary>
+    ''' <returns>#RETURNTYPE#</returns>	
+    <oDataColumn("#TITLE#"#DIRECTIVES#)>
+    Public Property #PROPERTYNAME# As #RETURNTYPE#
+        Get
+            Return getProperty()
+        End Get
+        Set(value As #RETURNTYPE#)
+            setProperty(value)
+        End Set
+    End Property

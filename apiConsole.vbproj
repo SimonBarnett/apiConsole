@@ -82,10 +82,10 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AboutBox1.Designer.vb">
+    <Compile Include="Dialogs\AboutBox1.Designer.vb">
       <DependentUpon>AboutBox1.vb</DependentUpon>
     </Compile>
-    <Compile Include="AboutBox1.vb">
+    <Compile Include="Dialogs\AboutBox1.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ApplicationEvents.vb" />
@@ -110,6 +110,12 @@
     <Compile Include="Classes\endPoint.vb" />
     <Compile Include="Classes\enum.vb" />
     <Compile Include="Classes\envNode.vb" />
+    <Compile Include="Dialogs\dlgSchema.Designer.vb">
+      <DependentUpon>dlgSchema.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\dlgSchema.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +164,10 @@
     </Compile>
     <Compile Include="Classes\ServerNode.vb" />
     <Compile Include="POSTexample.vb" />
+    <Compile Include="Schema\entForm.vb" />
+    <Compile Include="Schema\entRow.vb" />
+    <Compile Include="Schema\entSerial.vb" />
+    <Compile Include="Schema\entTemplate.vb" />
     <Compile Include="xmlEditor.Designer.vb">
       <DependentUpon>xmlEditor.vb</DependentUpon>
     </Compile>
@@ -166,7 +176,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AboutBox1.resx">
+    <EmbeddedResource Include="Dialogs\AboutBox1.resx">
       <DependentUpon>AboutBox1.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\addServerDialog.resx">
@@ -175,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Install.resx">
       <DependentUpon>Install.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\dlgSchema.resx">
+      <DependentUpon>dlgSchema.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
@@ -220,6 +233,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="emerge.ico" />
+    <None Include="Resources\addLogin.sql" />
+    <None Include="Resources\txtSubForm.txt" />
+    <None Include="Resources\txtSerialProp.txt" />
+    <None Include="Resources\txtSerial.txt" />
+    <None Include="Resources\txtRow.txt" />
+    <None Include="Resources\txtPropertyReadOnly.txt" />
+    <None Include="Resources\txtProperty.txt" />
+    <None Include="Resources\txtForm.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

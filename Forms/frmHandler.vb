@@ -181,9 +181,7 @@ Public Class frmHandler
             End While
 
             requestStream.Close()
-            uploadResponse = uploadRequest.GetResponse()
-
-            e.Result = uploadResponse
+            e.Result = uploadRequest.GetResponse()
 
         Catch ex As Exception
             e.Result = ex

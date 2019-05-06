@@ -1,0 +1,12 @@
+
+''' <summary>
+''' A nullable version of row#FORM#.
+'''
+''' This is used to deserialise JSON data
+''' and should not be instantiated directly.
+''' </summary>
+Public Class serial#FORM# 
+
+#PROPERTIES#
+
+End Class

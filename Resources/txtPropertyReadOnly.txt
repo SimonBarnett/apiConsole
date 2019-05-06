@@ -1,0 +1,12 @@
+    
+	''' <summary>
+    ''' Get the Read Only "#TITLE#" Value of #FORMNAME#.
+    ''' </summary>
+    ''' <returns>#RETURNTYPE#</returns>	
+    <oDataColumn("#TITLE#"#DIRECTIVES#)>
+    Public Readonly Property #PROPERTYNAME# As #RETURNTYPE#
+        Get
+            Return getProperty()
+        End Get
+
+    End Property

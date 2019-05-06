@@ -117,41 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="API_Feed_item" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\API Feed item.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="API_Feed_project" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\API Feed project.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="API_Handler_item" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\API Handler item.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="API_Handler_Project" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\API Handler Project.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="txtForm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\txtForm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="txtProperty" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\txtProperty.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="txtPropertyReadOnly" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\txtPropertyReadOnly.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="txtRow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\txtRow.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="txtSerial" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\txtSerial.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="txtSerialProp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\txtSerialProp.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="txtSubForm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\txtSubForm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="addLogin" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\addLogin.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
+  <metadata name="Timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="SendWorker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>106, 17</value>
+  </metadata>
 </root>

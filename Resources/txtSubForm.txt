@@ -1,0 +1,13 @@
+    
+	''' <summary>
+    ''' Get/set the #FORMNAME# subform.
+    ''' </summary>
+    ''' <returns>#FORMNAME#</returns>
+	Public Property #FORMNAME# As #FORMNAME#
+        Get
+            Return MyBase.SubForms("#FORMNAME#")
+        End Get
+        Set(value As #FORMNAME#)
+            MyBase.SubForms("#FORMNAME#") = value
+        End Set
+    End Property

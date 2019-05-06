@@ -42,6 +42,8 @@ Partial Class Form1
         Me.ExectueHandlerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReloadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FormatToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.InstallToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TileHorizontallyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TileVerticallyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -56,8 +58,6 @@ Partial Class Form1
         Me.Splitter1 = New System.Windows.Forms.Splitter()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
-        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.InstallToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -190,6 +190,17 @@ Partial Class Form1
         Me.FormatToolStripMenuItem.Size = New System.Drawing.Size(114, 22)
         Me.FormatToolStripMenuItem.Text = "For&mat"
         '
+        'ToolStripMenuItem3
+        '
+        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(111, 6)
+        '
+        'InstallToolStripMenuItem
+        '
+        Me.InstallToolStripMenuItem.Name = "InstallToolStripMenuItem"
+        Me.InstallToolStripMenuItem.Size = New System.Drawing.Size(114, 22)
+        Me.InstallToolStripMenuItem.Text = "Install"
+        '
         'WindowToolStripMenuItem
         '
         Me.WindowToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TileHorizontallyToolStripMenuItem, Me.TileVerticallyToolStripMenuItem, Me.CascadeToolStripMenuItem})
@@ -225,13 +236,13 @@ Partial Class Form1
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(142, 22)
         Me.AboutToolStripMenuItem.Text = "About"
         '
         'GITHubcomToolStripMenuItem
         '
         Me.GITHubcomToolStripMenuItem.Name = "GITHubcomToolStripMenuItem"
-        Me.GITHubcomToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.GITHubcomToolStripMenuItem.Size = New System.Drawing.Size(142, 22)
         Me.GITHubcomToolStripMenuItem.Text = "GITHub.com"
         '
         'StatusStrip1
@@ -287,17 +298,6 @@ Partial Class Form1
         '
         Me.Timer2.Enabled = True
         Me.Timer2.Interval = 1000
-        '
-        'ToolStripMenuItem3
-        '
-        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(149, 6)
-        '
-        'InstallToolStripMenuItem
-        '
-        Me.InstallToolStripMenuItem.Name = "InstallToolStripMenuItem"
-        Me.InstallToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.InstallToolStripMenuItem.Text = "Install"
         '
         'Form1
         '

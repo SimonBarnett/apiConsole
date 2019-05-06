@@ -1,4 +1,7 @@
-﻿Public Class envNode : Inherits TreeNode
+﻿Imports System.IO
+Imports System.Xml
+
+Public Class envNode : Inherits TreeNode
 
     Dim cmEnv As New ContextMenu
 
@@ -28,11 +31,16 @@
             .ContextMenu = cmEnv
 
             With cmEnv
-                .MenuItems.Add(New MenuItem("$metadata", AddressOf metadata))
+                If String.Compare(Me.Name, "system", True) = 0 Then
+                    Beep()
+
+                Else
+                    .MenuItems.Add(New MenuItem("$metadata", AddressOf metadata))
+                    .MenuItems.Add(New MenuItem("Build Schema", AddressOf buildschema))
+
+                End If
 
             End With
-
-
 
             _Feeds = New TreeNode
             With _Feeds
@@ -63,14 +71,49 @@
         System.Diagnostics.Process.Start(
             Replace(
                 String.Format(
-                    "{0}/odata/Priority/tabula.ini/{1}/$metadata",
+                    "{0}/odata/Priority/{1}/{2}/$metadata",
                     _Parent.Name,
-                    Me.Name
+                    Me.Name,
+                    TryCast(_Parent, ServerNode).tabulaini
                 ),
                 "http://",
                 "https://",,, CompareMethod.Text
             )
         )
+    End Sub
+
+    Private Sub buildschema(sender As Object, e As System.EventArgs)
+
+        Using d As New FolderBrowserDialog
+            d.SelectedPath = AppDomain.CurrentDomain.BaseDirectory
+            Try
+                d.SelectedPath = My.Settings.LastSchemaLoc
+            Catch : End Try
+
+            If d.ShowDialog = DialogResult.OK Then
+                With My.Settings
+                    .LastSchemaLoc = d.SelectedPath
+                    .Save()
+                End With
+
+                Dim dlgSch As New dlgSchema(
+                    d.SelectedPath,
+                    String.Format("{0}/api/{1}/schema.ashx", _Parent.Name, Me.Name)
+                )
+
+                Dim res As DialogResult = dlgSch.ShowDialog()
+                If Not res = DialogResult.OK Then
+                    MsgBox(dlgSch.Exception.Message)
+
+                Else
+                    MsgBox("Ok.")
+
+                End If
+
+            End If
+
+        End Using
+
     End Sub
 
 End Class

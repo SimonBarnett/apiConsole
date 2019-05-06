@@ -8,7 +8,14 @@ Public Class ServerNode : Inherits TreeNode
     Dim cmServer As New ContextMenu
     Dim _f As Form
 
-    public refreshWorker As System.ComponentModel.BackgroundWorker
+    Private _tabulaini As String = "tabula.ini"
+    Public ReadOnly Property tabulaini As String
+        Get
+            Return _tabulaini
+        End Get
+    End Property
+
+    Public refreshWorker As System.ComponentModel.BackgroundWorker
 
     Private ReadOnly Property url As String
         Get
@@ -86,6 +93,10 @@ Public Class ServerNode : Inherits TreeNode
 
         Dim doc As New XmlDocument
         doc.LoadXml(e.Result.ReadToEnd)
+
+        Try
+            _tabulaini = doc.SelectSingleNode("api").Attributes("tabulaini").Value
+        Catch : End Try
 
         For Each env As XmlNode In doc.SelectNodes("//env")
             Dim envName As String = env.Attributes("name").Value

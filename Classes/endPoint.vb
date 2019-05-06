@@ -65,12 +65,15 @@ Public Class endPoint : Inherits TreeNode
                     With cm
                         .MenuItems.Add(New MenuItem("View Log", AddressOf ParentForm.OpenLog))
                         .MenuItems.Add(New MenuItem("Debug Handler", AddressOf ParentForm.OpenDebug))
+                        .MenuItems.Add(New MenuItem("Copy Link", AddressOf ParentForm.CopyLink))
+
                     End With
 
                 Case Else
                     With cm
                         .MenuItems.Add(New MenuItem("View Log", AddressOf ParentForm.OpenLog))
                         .MenuItems.Add(New MenuItem("Debug Feed", AddressOf ParentForm.OpenDebug))
+                        .MenuItems.Add(New MenuItem("Copy Link", AddressOf ParentForm.CopyLink))
 
                     End With
 

@@ -34,6 +34,7 @@ Public Class Form1
                 .Nodes.Add(New ServerNode(Me, ServerName))
                 TryCast(.Nodes(ServerName), ServerNode).Refresh(Me, Nothing)
             End With
+
         Next
 
     End Sub
@@ -56,6 +57,23 @@ Public Class Form1
                 MsgBox(ex.Message)
 
             End Try
+
+        End If
+
+    End Sub
+
+    Public Sub CopyLink()
+        If Not ServTree.SelectedNode Is Nothing Then
+            With TryCast(ServTree.SelectedNode, endPoint)
+                Dim l As String = String.Format(
+                    "{0}/api/{1}/{2}",
+                    .Server,
+                    .Environment,
+                    .Name
+                )
+                Clipboard.SetText(l)
+
+            End With
 
         End If
 

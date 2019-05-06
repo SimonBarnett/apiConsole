@@ -211,6 +211,10 @@ Public Class frmFeed : Inherits baseForm
 
     End Sub
 
+    Private Sub DataGridView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView.CellContentClick
+
+    End Sub
+
 
 #End Region
 

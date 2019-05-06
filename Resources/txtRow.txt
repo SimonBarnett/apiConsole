@@ -1,0 +1,19 @@
+
+''' <summary>
+''' Defines rows in the #FORM# form.
+''' </summary>
+<oRowClass("#FORM#", "serial#FORM#")>
+Public Class row#FORM# : Inherits oRow
+
+    ''' <summary>
+    ''' row#FORM# Constructor method.
+    ''' </summary>
+    ''' <param name="Parent">Parent oForm of this row</param>
+    Sub New(Parent As oForm)
+        MyBase.New(Parent)
+
+    End Sub
+#SUBFORMS#
+#PROPERTIES#
+
+End Class
