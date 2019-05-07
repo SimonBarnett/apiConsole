@@ -73,8 +73,8 @@ Public Class envNode : Inherits TreeNode
                 String.Format(
                     "{0}/odata/Priority/{1}/{2}/$metadata",
                     _Parent.Name,
-                    Me.Name,
-                    TryCast(_Parent, ServerNode).tabulaini
+                    TryCast(_Parent, ServerNode).tabulaini,
+                    Me.Name
                 ),
                 "http://",
                 "https://",,, CompareMethod.Text
