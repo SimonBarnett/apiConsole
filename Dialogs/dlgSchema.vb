@@ -43,6 +43,12 @@ Public Class dlgSchema
 
     Private Sub SendWorker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles SendWorker.DoWork
 
+        System.Net.ServicePointManager.ServerCertificateValidationCallback =
+          Function(se As Object,
+          cert As System.Security.Cryptography.X509Certificates.X509Certificate,
+          chain As System.Security.Cryptography.X509Certificates.X509Chain,
+          sslerror As System.Net.Security.SslPolicyErrors) True
+
         Try
             Dim doc As New XmlDocument
             doc.Load(_url)
