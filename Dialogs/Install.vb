@@ -30,7 +30,21 @@ Public Class Install
             Next
 
             If ret.Count = 0 Then
-                Throw New Exception("Visual Studio Template folder not found.")
+                Dim dlg As New FolderBrowserDialog
+                With dlg
+                    .Description = "Locate VS Template folder."
+                    .SelectedPath = Path.Combine(
+                        Environment.ExpandEnvironmentVariables("%userprofile%"),
+                        "Documents"
+                    )
+                    If .ShowDialog() = DialogResult.OK Then
+                        ret.Add(New DirectoryInfo(.SelectedPath))
+
+                    End If
+
+                End With
+                If ret.Count = 0 Then Throw New Exception("Visual Studio Template folder not found.")
+
             End If
             Return ret
 
